@@ -1,44 +1,50 @@
 {
-    "name": "formatter-sample",
-    "displayName": "formatter-sample",
-    "description": "",
+    "name": "jet-formatter",
+    "displayName": "Jet Template Formatter",
+    "description": "Formatter for Go HTML Jet template with front matter",
     "version": "0.0.1",
-    "publisher": "jrieken",
+    "author": "Alexei Danchenkov",
+    "publisher": "alexeidanchenkov",
+    "license": "MIT",
     "engines": {
-        "vscode": "^1.6.0"
+        "vscode": "^1.32.0"
+    },
+    "keywords": [
+        "Jet",
+        "Formatters"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/danchenkov/jet-formatter"
     },
     "categories": [
-        "Other"
+        "Formatters"
     ],
     "activationEvents": [
-        "onLanguage:foo-lang"
+        "onLanguage:jet"
     ],
-    "main": "./out/src/extension",
+    "main": "./dist/extension",
     "contributes": {
         "languages": [
             {
-                "id": "foo-lang",
+                "id": "jet",
                 "aliases": [
-                    "Foo"
+                    "Jet"
                 ],
                 "extensions": [
-                    "foo"
+                    "jet",
+                    "html"
                 ]
-            }
-        ],
-        "commands": [
-            {
-                "command": "extension.format-foo",
-                "title": "(Bad) Format Foo Files"
             }
         ]
     },
     "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install && tsc"
+        "postinstall": "tsc"
     },
     "devDependencies": {
-        "@types/node": "*",
-        "vscode": "1.0.3",
-        "typescript": "2.0.6"
+        "typescript": "5.4.2"
+    },
+    "dependencies": {
+        "@types/vscode": "^1.88.0"
     }
 }

@@ -1,33 +1,80 @@
-'use strict';
+"use strict";
 
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
+// import format from "html-format";
 
-export function activate(context: vscode.ExtensionContext) {
+// class HTMLDocumentFormatter implements vscode.DocumentFormattingEditProvider {
+//   public provideDocumentFormattingEdits(
+//     document: vscode.TextDocument,
+//     options: vscode.FormattingOptions
+//   ): Thenable<vscode.TextEdit[]> {
+//     const { tabSize, insertSpaces } = options;
+//     const indent = insertSpaces ? " ".repeat(tabSize) : "\t";
+//     const { languageId: lang, uri } = document;
+//     const langConfig = vscode.workspace.getConfiguration(`[${lang}]`, uri);
+//     const config = vscode.workspace.getConfiguration("editor", uri);
+//     const width = langConfig["editor.wordWrapColumn"] || config.get("wordWrapColumn");
+//     const text = document.getText();
+//     const range = new vscode.Range(
+//       document.positionAt(0),
+//       document.positionAt(text.length)
+//     );
+//     return Promise.resolve([
+//       new vscode.TextEdit(range, format(text, indent, width)),
+//     ]);
+//   }
+// }
 
-    // 👎 formatter implemented as separate command
-    vscode.commands.registerCommand('extension.format-foo', () => {
-        const {activeTextEditor} = vscode.window;
-
-        if (activeTextEditor && activeTextEditor.document.languageId === 'foo-lang') {
-            const {document} = activeTextEditor;
-            const firstLine = document.lineAt(0);
-            if (firstLine.text !== '42') {
-                const edit = new vscode.WorkspaceEdit();
-                edit.insert(document.uri, firstLine.range.start, '42\n');
-                return vscode.workspace.applyEdit(edit)
-            }
-        }
-    });
-
-    // 👍 formatter implemented using API
-    vscode.languages.registerDocumentFormattingEditProvider('foo-lang', {
-        provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
-            const firstLine = document.lineAt(0);
-            if (firstLine.text !== '42') {
-                return [vscode.TextEdit.insert(firstLine.range.start, '42\n')];
-            }
-        }
-    });
+function jetFormat(text: string, indent: string, width: number): string {
+  indent = indent + 0
+  width = width + 0
+  text = text.replace('{{ block', '^^bLoCk')
+  text = text.replace('{{block', '{{ block')
+  text = text.replace('^^bLoCk', '{{block')
+  return text
 }
 
+class JetFormatter implements vscode.DocumentFormattingEditProvider {
+  public provideDocumentFormattingEdits(
+    document: vscode.TextDocument,
+    options: vscode.FormattingOptions
+  ): Thenable<vscode.TextEdit[]> {
+    const { tabSize, insertSpaces } = options;
+    const indent = insertSpaces ? " ".repeat(tabSize) : "\t";
+    const { languageId: lang, uri } = document;
+    const langConfig = vscode.workspace.getConfiguration(`[${lang}]`, uri);
+    const config = vscode.workspace.getConfiguration("editor", uri);
+    const width = langConfig["editor.wordWrapColumn"] || config.get("wordWrapColumn");
+    const text = document.getText();
+    const range = new vscode.Range(
+      document.positionAt(0),
+      document.positionAt(text.length)
+    );
+    return Promise.resolve([
+      new vscode.TextEdit(range, jetFormat(text, indent, width)),
+    ]);
+  }
+}
 
+export function activate(context: vscode.ExtensionContext) {
+  // 👍 formatter implemented using API
+  // vscode.languages.registerDocumentFormattingEditProvider('jet', {
+  //     provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
+  //         const firstLine = document.lineAt(0);
+  //         if (firstLine.text !== '42') {
+  //             return [vscode.TextEdit.insert(firstLine.range.start, '42\n')];
+  //         }
+  //     }
+  // });
+
+  const jetFormatter = new JetFormatter();
+  context.subscriptions.push(
+    vscode.languages.registerDocumentFormattingEditProvider("html", jetFormatter)
+  );
+  context.subscriptions.push(
+    vscode.languages.registerDocumentFormattingEditProvider("jet", jetFormatter)
+  );
+
+}
+
+export function deactivate() { }
