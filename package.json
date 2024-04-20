@@ -2,7 +2,7 @@
     "name": "jet-formatter",
     "displayName": "Jet Template Formatter",
     "description": "Formatter for Go HTML Jet template with front matter",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "author": "Alexei Danchenkov",
     "publisher": "alexeidanchenkov",
     "license": "MIT",
@@ -23,7 +23,7 @@
     "activationEvents": [
         "onLanguage:jet"
     ],
-    "main": "./dist/extension",
+    "main": "./dist/src/extension.js",
     "contributes": {
         "languages": [
             {
@@ -42,10 +42,9 @@
         "postinstall": "tsc"
     },
     "devDependencies": {
+        "@types/node": "^20.12.7",
+        "@types/vscode": "^1.32.0",
         "typescript": "5.4.2"
-    },
-    "dependencies": {
-        "@types/vscode": "^1.88.0"
     },
     "packageManager": "pnpm@9.0.4+sha1.b198ac6d38244fd829253720f9daafd6a606834d"
 }
