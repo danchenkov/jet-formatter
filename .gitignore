@@ -1,4 +1,5 @@
-dist
 node_modules
-out
+/dist/test/**
+/dist/src/**
 *.vsix
+.DS_Store

@@ -1,14 +1,21 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es5",
-        "outDir": "out",
+        "target": "esnext",
+        "outDir": "dist",
         "lib": [
-            "es6"
+            "esnext",
+            "dom"
         ],
         "sourceMap": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
         "rootDir": "."
     },
+    "include": [
+        "src/**/*"
+    ],
     "exclude": [
         "node_modules",
         ".vscode-test"
