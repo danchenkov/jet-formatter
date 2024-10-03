@@ -1,0 +1,110 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Jet Template",
+	"scopeName": "text.html.jet",
+	"fileTypes": [
+		"jet",
+		"html"
+	],
+	"patterns": [
+		{
+			"include": "#frontMatter"
+		},
+		{
+			"include": "#commentBlock"
+		},
+		{
+			"include": "#dqstrings"
+		},
+		{
+			"include": "#control"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"comment": "Public functions/fields",
+			"match": "(?<=[\\. {])[A-Z]\\w*(?=.*}})",
+			"name": "support.function.builtin.jet"
+		},
+		{
+			"comment": "Built-in functions invoked",
+			"match": "\\b(isset|len|lower|upper|hasPrefix|hasSuffix|repeat|replace|splt|trimSpace|html|url|safeHtml|safeJs|raw|writeJson|map)\\b(?=\\()",
+			"name": "support.function.builtin.jet"
+		},
+		{
+			"comment": "Built-in functions pipped",
+			"match": "(?<=\\|)\\s*(lower|upper|hasPrefix|hasSuffix|repeat|replace|splt|trimSpace|html|url|safeHtml|safeJs|raw|writeJson)",
+			"name": "support.function.builtin.jet"
+		},
+		{
+			"comment": "Content",
+			"include": "#content"
+		}
+	],
+	"repository": {
+		"dqstrings": {
+			"comment": "Double-quoted strings",
+			"name": "string.quoted.double.jet",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.jet",
+					"match": "\\\\."
+				}
+			]
+		},
+		"frontMatter": {
+			"comment": "Front Matter",
+			"name": "meta.embedded.frontmatter.yaml",
+			"yaml.format.enable": true,
+			"begin": "^-{3}$",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.frontmatter.begin"
+				}
+			},
+			"end": "^-{3}$",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.frontmatter.end"
+				}
+			},
+			"patterns": [
+				{
+					"include": "source.yaml"
+				}
+			]
+		},
+		"commentBlock": {
+			"comment": "Comments",
+			"name": "comment.block",
+			"begin": "\\{\\*",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.comment.begin"
+				}
+			},
+			"end": "\\*\\}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.comment.end"
+				}
+			}
+		},
+		"control": {
+			"comment": "Control",
+			"name": "support.constant.jet",
+			"match": "(?<=\\{\\{)\\s*(if|else if|else|end|block|yield|range|extends|include|import)"
+		},
+		"keywords": {
+			"comment": "Keywords",
+			"name": "keyword.control.jet",
+			"match": "\\b(if|while|for|return)\\b"
+		},
+		"content": {
+			"include": "text.html.basic"
+		}
+	}
+}

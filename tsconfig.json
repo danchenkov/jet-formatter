@@ -4,11 +4,18 @@
         "target": "esnext",
         "outDir": "dist",
         "lib": [
-            "esnext"
+            "esnext",
+            "dom"
         ],
         "sourceMap": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
         "rootDir": "."
     },
+    "include": [
+        "src/**/*"
+    ],
     "exclude": [
         "node_modules",
         ".vscode-test"
