@@ -9,14 +9,14 @@ importers:
   .:
     devDependencies:
       '@types/vscode':
-        specifier: ^1.93.0
-        version: 1.93.0
+        specifier: ^1.96.0
+        version: 1.96.0
 
 packages:
 
-  '@types/vscode@1.93.0':
-    resolution: {integrity: sha512-kUK6jAHSR5zY8ps42xuW89NLcBpw1kOabah7yv38J8MyiYuOHxLQBi0e7zeXbQgVefDy/mZZetqEFC+Fl5eIEQ==}
+  '@types/vscode@1.96.0':
+    resolution: {integrity: sha512-qvZbSZo+K4ZYmmDuaodMbAa67Pl6VDQzLKFka6rq+3WUTY4Kro7Bwoi0CuZLO/wema0ygcmpwow7zZfPJTs5jg==}
 
 snapshots:
 
-  '@types/vscode@1.93.0': {}
+  '@types/vscode@1.96.0': {}

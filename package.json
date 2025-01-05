@@ -7,16 +7,12 @@
     "publisher": "alexeidanchenkov",
     "license": "MIT",
     "engines": {
-        "vscode": "^1.93.0"
+        "vscode": "^1.96.0"
     },
     "keywords": [
         "Jet",
         "Formatters"
     ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/danchenkov/jet-formatter"
-    },
     "categories": [
         "Programming Languages"
     ],
@@ -54,8 +50,12 @@
         "watch": "tsc -watch -p ./",
         "build": "vsce package; mv *.vsix ~/Downloads"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/danchenkov/jet-formatter.git"
+    },
     "devDependencies": {
-        "@types/vscode": "^1.93.0"
+        "@types/vscode": "^1.96.0"
     },
     "packageManager": "pnpm@9.1.0+sha512.67f5879916a9293e5cf059c23853d571beaf4f753c707f40cb22bed5fb1578c6aad3b6c4107ccb3ba0b35be003eb621a16471ac836c87beb53f9d54bb4612724"
 }
